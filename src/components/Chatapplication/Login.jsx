@@ -15,7 +15,7 @@ const Login = () => {
 
 
           <div className="relative mt-[40px] border-b-3 border-[#B8B8CE]">
-            <input className=" py-[15px]  pr-[66px] w-[368px] font-secondary text-[20px] font-semibold 
+            <input className=" py-[15px]  pr-[66px] w-[368px] outline-0 font-secondary text-[20px] font-semibold 
                text-[#11175D]" type="text" placeholder="Ladushing691@gmail.com "/>
             <p className="text-[#585D8E] text-[13px] font-secondary font-semibold absolute top-[-8px] 
             left-[-12px] bg-white w-35 text-center tracking-[2px]">Email Address</p>
