@@ -74,7 +74,8 @@ const Ragister = () => {
         <div className="md:w-[50%] flex md:justify-end justify-center">
           <div className="md:mr-[70px]">
             <h1 className="font-bold md:text-[34px] text-[23px] text-[#11175D] font-secondary">Get started with easily register</h1>
-          <p className="text-[#808080] font-secondary md:text-[20px] font-normal">Free register and you can enjoy it</p>
+          <p className="text-[#808080] font-secondary md:text-[20px] font-normal">Free register and you can enjoy it   
+          </p>
 
 
           <div className="relative mt-[40px]">
@@ -114,13 +115,13 @@ const Ragister = () => {
             <button
             onClick={signUp} className="text-[20px]  outline-0 w-50 md:w-[368px] bg-[#1E1E1E] rounded-full text-white 
             py-[20px]  font-semibold font-secondary cursor-pointer"><a href="#">Sign up</a></button>
-            <p className="mt-[30px] text-[#03014C] ml-22 text-[13px] font-primary font-normal">Already  have an account ? <span className="text-[#EA6C00]">Sign I n</span></p>
+            <p className="mt-[30px] text-[#03014C] md:ml-22 text-[16px] md:text-[13px] font-primary font-normal">Already  have an account ? <span className="text-[#EA6C00]">Sign I n</span></p>
            </div>
 
           
           </div>
         </div>
-        <div className="md:w-[50%] mr-4 md:mr-0">
+        <div className="md:w-[50%] w-full mt-5 md:mt-0">
           <img className="h-screen w-full object-cover" src={Reg} alt="" />
         </div>
       </div>
