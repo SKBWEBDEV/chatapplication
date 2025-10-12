@@ -15,14 +15,14 @@ const Login = () => {
 
 
           <div className="relative mt-[40px] border-b-3 border-[#B8B8CE]">
-            <input className=" py-[15px]  md:pr-[66px] md:w-[368px] outline-0 font-secondary text-[20px] font-semibold 
+            <input className=" py-[15px]  md:pr-[66px] md:w-[368px] w-80 outline-0 font-secondary text-[20px] font-semibold 
                text-[#11175D]" type="text" placeholder="Ladushing691@gmail.com "/>
             <p className="text-[#585D8E] text-[13px] font-secondary font-semibold absolute top-[-8px] 
             left-[-12px] bg-white w-35 text-center tracking-[2px]">Email Address</p>
           </div>
 
            <div className="relative mt-[40px] border-b-3 border-[#B8B8CE]">
-            <input className=" py-[15px]  pr-[66px] w-[368px] outline-0 font-secondary text-[20px] font-semibold 
+            <input className=" py-[15px]  pr-[66px] md:w-[368px] w-80 outline-0 font-secondary text-[20px] font-semibold 
              text-[#11175D]" type="text" placeholder="Password"/>
             <p className="text-[#585D8E] text-[13px] font-secondary font-semibold absolute top-[-8px] 
             left-[-20px] bg-white w-30 text-center tracking-[2px]">Password</p>
@@ -37,7 +37,7 @@ const Login = () => {
            </div>
 
           
-          </div>
+          </div> 
         </div>
         <div className="md:w-[50%] w-full mt-5">
           <img className="h-screen w-full object-cover" src={Here} alt="" />
