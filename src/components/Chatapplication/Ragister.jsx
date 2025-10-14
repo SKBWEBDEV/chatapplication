@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import Reg from "../../assets/reg.png"
-
+import {Link} from "react-router-dom"
 const Ragister = () => {
 
   const [email,setEmail] = useState ("")
@@ -114,8 +114,8 @@ const Ragister = () => {
            <div className="mt-[40px] ">
             <button
             onClick={signUp} className="text-[20px]  outline-0 w-50 md:w-[368px] bg-[#1E1E1E] rounded-full text-white 
-            py-[20px]  font-semibold font-secondary cursor-pointer"><a href="#">Sign up</a></button>
-            <p className="mt-[30px] text-[#03014C] md:ml-22 text-[16px] md:text-[13px] font-primary font-normal">Already  have an account ? <span className="text-[#EA6C00]">Sign I n</span></p>
+            py-[20px]  font-semibold font-secondary cursor-pointer">Sign up</button>
+            <p className="mt-[30px] text-[#03014C] md:ml-22 text-[16px] md:text-[13px] font-primary font-normal">Already  have an account ? <Link to="/login"><span className="text-[#EA6C00]">Sign I n</span></Link></p>
            </div>
 
           

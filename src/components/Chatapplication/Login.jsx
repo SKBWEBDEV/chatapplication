@@ -1,8 +1,9 @@
 import Here from "../../assets/here.png"
 import Google from "../../assets/google.png"
+import { Link } from "react-router-dom"
 const Login = () => {
   return (
-    <div className="mt-25">
+    <div className="">
       <div className="md:flex items-center">
         <div className="md:w-[50%]  flex md:justify-end justify-center">
           <div className="md:mr-[180px]">
@@ -33,7 +34,7 @@ const Login = () => {
            <div className="mt-[40px] ">
             <button className="text-[20px] w-60 md:w-[368px] bg-[#1E1E1E] rounded-full text-white py-[20px]  font-semibold font-secondary"><a href="">Login to Continue</a></button>
             <p className="mt-[30px] text-[#03014C] md:ml-22 text-[16px] md:text-[13px] font-primary font-normal">
-              Don’t have an account ?  <span className="text-[#EA6C00]">Sign up</span></p>
+              Don’t have an account ?  <Link to="/ragister"><span className="text-[#EA6C00]">Sign I n</span></Link></p>
            </div>
 
           
