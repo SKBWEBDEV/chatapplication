@@ -3,7 +3,7 @@ import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import Ragister from "./components/Chatapplication/Ragister";
 import Login from "./components/Chatapplication/Login";
-
+import firebaseConfig from "./components/firebase/firebaseconfig";
 
 function App() {
 const router = createBrowserRouter([

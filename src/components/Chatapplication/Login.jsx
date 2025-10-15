@@ -1,8 +1,12 @@
 import Here from "../../assets/here.png"
 import Google from "../../assets/google.png"
 import { Link } from "react-router-dom"
+import { FaEyeSlash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import { useState } from "react";
 const Login = () => {
+
+ const [show,setShow] = useState (false)
 
 const [email,setEmail] = useState ("")
 const [errorEmail,setErrorEmail] = useState ("")
@@ -38,7 +42,7 @@ const [errorEmail,setErrorEmail] = useState ("")
     setPasswordError("give your password")
   }else{
     if (!/^(?=.*[\d])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,16}$/.test(password)) {
-      setPasswordError("at least one lowercase,one uppercase letter,one digit,one special characte,at least 8 characters long")
+      setPasswordError("at least one lowercase,one uppercase letter,one digit,one special characte,at least 8 characters ")
     }
   }
  }  
@@ -71,12 +75,17 @@ const [errorEmail,setErrorEmail] = useState ("")
 
            <div className="relative mt-[40px] border-b-3 border-[#B8B8CE]">
             <input className=" py-[15px]  pr-[66px] md:w-[368px] w-80 outline-0 font-secondary text-[20px] font-semibold 
-             text-[#11175D]" type="text" 
+             text-[#11175D]" type={show ? "text" : "password"}
              onChange={passwordUpdate}
              placeholder="Password"/>
             <p className="text-[#585D8E] text-[13px] font-secondary font-semibold absolute top-[-8px] 
             left-[-20px] bg-white w-30 text-center tracking-[2px]">Password</p>
-            
+
+            <div className="absolute top-[40%] right-10">
+             {
+              show ?<FaEye onClick={()=> setShow (!show)} /> : <FaEyeSlash onClick={()=> setShow (!show)}/>   
+             }
+            </div>
           </div>
           <div>
             <p className="mt-5 bg-gray-600 text-white font-bold text-center md:w-[368px] w-80 rounded-[8px]">{passwordError}</p>
@@ -86,10 +95,10 @@ const [errorEmail,setErrorEmail] = useState ("")
            <div className="mt-[40px] ">
             <button
             onClick={signUp}
-            className="text-[20px] w-60 md:w-[368px] bg-[#1E1E1E] rounded-full text-white py-[20px]  font-semibold font-secondary"><a href="">Login to Continue</a></button>
+            className="text-[20px] w-60 md:w-[368px] bg-[#1E1E1E] rounded-full text-white py-[20px]  font-semibold font-secondary">Login to Continue</button>
             <p className="mt-[30px] text-[#03014C] md:ml-22 text-[16px] md:text-[13px] font-primary font-normal">
               Don’t have an account ? 
-              <Link to="/"><span className="text-[#EA6C00]">Sign I n</span></Link>
+              <Link to="/"><span className="text-[#EA6C00]">Sign up</span></Link>
               </p>
            </div>
 
