@@ -1,6 +1,6 @@
 import Here from "../../assets/here.png"
 import Google from "../../assets/google.png"
-// import { Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useState } from "react";
 const Login = () => {
 
@@ -88,7 +88,9 @@ const [errorEmail,setErrorEmail] = useState ("")
             onClick={signUp}
             className="text-[20px] w-60 md:w-[368px] bg-[#1E1E1E] rounded-full text-white py-[20px]  font-semibold font-secondary"><a href="">Login to Continue</a></button>
             <p className="mt-[30px] text-[#03014C] md:ml-22 text-[16px] md:text-[13px] font-primary font-normal">
-              Don’t have an account ?  <span className="text-[#EA6C00]">Sign I n</span></p>
+              Don’t have an account ? 
+              <Link to="/"><span className="text-[#EA6C00]">Sign I n</span></Link>
+              </p>
            </div>
 
           
