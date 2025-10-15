@@ -143,7 +143,7 @@ const Ragister = () => {
               <p className="text-[#585D8E] text-[13px] font-secondary font-semibold absolute top-[-8px] 
             left-[20px] bg-white w-30 text-center tracking-[2px]">Password</p>
 
-              <div className="absolute top-[40%] right-40">
+              <div className="absolute top-[40%] md:right-40 right-15">
                 {show ? (
                   <FaEye onClick={() => setShow(!show)} />
                 ) : (
