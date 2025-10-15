@@ -1,27 +1,26 @@
-import { createBrowserRouter } from "react-router";
-import { RouterProvider } from "react-router/dom";
-import Ragister from "./components/Chatapplication/Ragister";
-import Login from "./components/Chatapplication/Login";
+// import { createBrowserRouter } from "react-router";
+// import { RouterProvider } from "react-router/dom";
+// import Ragister from "./components/Chatapplication/Ragister";
+// import Login from "./components/Chatapplication/Login";
 
+import Login from "./components/Chatapplication/Login";
+import Ragister from "./components/Chatapplication/Ragister";
 
 function App() {
-  const router = createBrowserRouter([
-  {
-    path: "/ragister",
-    element: <Ragister/>,
-  },
-  {
-    path: "/login",
-    element: <Login/>,
-  },
- 
-]);
+  //   const router = createBrowserRouter([
+  //   {
+  //      path: "/",
+  //     element: <Ragister />
+  //   },
+
+  // ]);
 
   return (
     <>
-      <RouterProvider router={router} />
+      <Ragister />
+      <Login />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
