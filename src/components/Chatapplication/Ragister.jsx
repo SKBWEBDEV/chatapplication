@@ -5,6 +5,8 @@ import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
+
+
 const Ragister = () => {
   const navigate = useNavigate();
   const auth = getAuth();
@@ -76,7 +78,7 @@ const Ragister = () => {
     <div>
       <ToastContainer
         position="top-center"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={false}
@@ -103,7 +105,7 @@ const Ragister = () => {
               </p>
               <input
                 className=" py-[15px] pl-[65px] outline-0 md:pr-[66px] md:w-[368px] font-secondary text-[20px] font-semibold 
-            border-[#B8B8CE] rounded-[8px] border-3 text-[#11175D]"
+                            border-[#B8B8CE] rounded-[8px] border-3 text-[#11175D]"
                 type="email"
                 onChange={handleEmail}
                 value={email}
@@ -161,8 +163,7 @@ const Ragister = () => {
               <button
                 onClick={signUp}
                 className="text-[20px]  outline-0 w-50 md:w-[368px] bg-[#1E1E1E] rounded-full text-white 
-            py-[20px]  font-semibold font-secondary cursor-pointer"
-              >
+            py-[20px]  font-semibold font-secondary cursor-pointer">
                 Sign up
               </button>
               <p className="mt-[30px] text-[#03014C] md:ml-22 text-[16px] md:text-[13px] font-primary font-normal">
