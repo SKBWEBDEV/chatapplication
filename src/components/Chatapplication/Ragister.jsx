@@ -3,11 +3,13 @@ import Reg from "../../assets/reg.png";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
-
+import { DNA } from 'react-loader-spinner'
 
 const Ragister = () => {
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
   const auth = getAuth();
 
@@ -58,13 +60,21 @@ const Ragister = () => {
       }
     }
     if (email && name && password && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setLoading(true);
+      
       createUserWithEmailAndPassword(auth, email, password)
         .then((user) => {
+          sendEmailVerification(auth.currentUser)
           console.log(user, "user");
           toast.success("ragistation succesfully done");
           setTimeout(() => {
             navigate("/login");
           }, 3000);
+          setLoading(false);
+        }).finally(()=> {
+          setEmail("")
+          setName("")
+          setPassword("")
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -140,10 +150,15 @@ const Ragister = () => {
             border-[#B8B8CE] rounded-[8px] border-3 text-[#11175D]"
                 type={show ? "text" : "password"}
                 onChange={passwordUpdate}
+                value={password}
                 placeholder="Password"
               />
-              <p className="text-[#585D8E] text-[13px] font-secondary font-semibold absolute top-[-8px] 
-            left-[20px] bg-white w-30 text-center tracking-[2px]">Password</p>
+              <p
+                className="text-[#585D8E] text-[13px] font-secondary font-semibold absolute top-[-8px] 
+            left-[20px] bg-white w-30 text-center tracking-[2px]"
+              >
+                Password
+              </p>
 
               <div className="absolute top-[40%] md:right-40 right-15">
                 {show ? (
@@ -160,12 +175,27 @@ const Ragister = () => {
             </div>
 
             <div className="mt-[40px] ">
-              <button
-                onClick={signUp}
-                className="text-[20px]  outline-0 w-50 md:w-[368px] bg-[#1E1E1E] rounded-full text-white 
-            py-[20px]  font-semibold font-secondary cursor-pointer">
-                Sign up
-              </button>
+              {loading ? (
+                <div className="ml-30">
+                  <DNA
+                  visible={true}
+                  height="80"
+                  width="80"
+                  ariaLabel="dna-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="dna-wrapper"
+                />
+                </div>
+              ) : (
+                <button
+                  onClick={signUp}
+                  className="text-[20px]  outline-0 w-50 md:w-[368px] bg-[#1E1E1E] rounded-full text-white 
+            py-[20px]  font-semibold font-secondary cursor-pointer"
+                >
+                  Sign up
+                </button>
+              )}
+
               <p className="mt-[30px] text-[#03014C] md:ml-22 text-[16px] md:text-[13px] font-primary font-normal">
                 Already have an account ?
                 <Link to="/login">

@@ -4,8 +4,11 @@ import { Link } from "react-router-dom"
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { useState } from "react";
+import { getAuth, signInWithEmailAndPassword,GoogleAuthProvider , signInWithPopup } from "firebase/auth";
+import { toast, ToastContainer } from "react-toastify";
 const Login = () => {
-
+const provider = new GoogleAuthProvider();
+const auth = getAuth();
  const [show,setShow] = useState (false)
 
 const [email,setEmail] = useState ("")
@@ -45,17 +48,56 @@ const [errorEmail,setErrorEmail] = useState ("")
       setPasswordError("at least one lowercase,one uppercase letter,one digit,one special characte,at least 8 characters ")
     }
   }
+   if (email && password && /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(email)) {
+    signInWithEmailAndPassword(auth, email, password)
+  .then((user) => {
+    
+    toast.success("login succes fully done")
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    if (errorCode.includes("auth/invalid-credential")) {
+      toast.error("please provide right email & password")
+    }
+  });
+  }
  }  
+
+ const signupGoogle = ()=> {
+signInWithPopup(auth, provider)
+  .then((user) => {
+   console.log(user);
+   toast.success("login with google successfully done")
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    console.log(errorCode);
+    
+  });
+ }
 
   return (
     <div className="">
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        // transition={Bounce}
+      />
       <div className="md:flex items-center">
         <div className="md:w-[50%]  flex md:justify-end justify-center">
           <div className="md:mr-[180px]">
             <h1 className="font-bold text-[28px] md:text-[34px] text-[#11175D] font-secondary">Login to your account!</h1>
           
           <div className="flex rounded-[8px] gap-[10px] items-center mt-[29px] border-[#03014C]/20 border-2 w-[220px] md:py-[22px] px-5 md:px-[35px] py-5"> 
-            <img src={Google} alt="" />
+            <img onClick={signupGoogle} className="cursor-pointer" src={Google} alt="" />
             <p className="text-[13px] font-semibold font-primary text-[#03014C]">Login with Google</p>
           </div>
 
@@ -90,12 +132,11 @@ const [errorEmail,setErrorEmail] = useState ("")
           <div>
             <p className="mt-5 bg-gray-600 text-white font-bold text-center md:w-[368px] w-80 rounded-[8px]">{passwordError}</p>
           </div>
-           
-           
            <div className="mt-[40px] ">
             <button
             onClick={signUp}
-            className="text-[20px] w-60 md:w-[368px] bg-[#1E1E1E] rounded-full text-white py-[20px]  font-semibold font-secondary">Login to Continue</button>
+            className="text-[20px] cursor-pointer w-60 md:w-[368px] bg-[#1E1E1E] rounded-full text-white py-[20px]  font-semibold font-secondary">Login to Continue</button>
+            <p className="text-[20px] mt-7 text-center text-amber-600 cursor-pointer"><Link to="/forgote">Forgote Passwored</Link></p>
             <p className="mt-[30px] text-[#03014C] md:ml-22 text-[16px] md:text-[13px] font-primary font-normal">
               Don’t have an account ? 
               <Link to="/"><span className="text-[#EA6C00]">Sign up</span></Link>

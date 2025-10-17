@@ -4,6 +4,7 @@ import { RouterProvider } from "react-router/dom";
 import Ragister from "./components/Chatapplication/Ragister";
 import Login from "./components/Chatapplication/Login";
 import firebaseConfig from "./components/firebase/firebaseconfig";
+import Forgote from "./components/Chatapplication/Forgote";
 
 function App() {
 const router = createBrowserRouter([
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
    {
     path: "/login",
     element: <Login/>,
+  },
+  {
+    path: "/forgote",
+    element: <Forgote/>,
   },
  
 ]);
