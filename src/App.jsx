@@ -5,11 +5,16 @@ import Ragister from "./components/Chatapplication/Ragister";
 import Login from "./components/Chatapplication/Login";
 import firebaseConfig from "./components/firebase/firebaseconfig";
 import Forgote from "./components/Chatapplication/Forgote";
+import Chat from "./components/Chatapplication/Chat";
 
 function App() {
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Chat/>,
+  },
+  {
+    path: "/register",
     element: <Ragister/>,
   },
    {

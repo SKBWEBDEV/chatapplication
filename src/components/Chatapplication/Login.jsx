@@ -139,8 +139,9 @@ signInWithPopup(auth, provider)
             <p className="text-[20px] mt-7 text-center text-amber-600 cursor-pointer"><Link to="/forgote">Forgote Passwored</Link></p>
             <p className="mt-[30px] text-[#03014C] md:ml-22 text-[16px] md:text-[13px] font-primary font-normal">
               Don’t have an account ? 
-              <Link to="/"><span className="text-[#EA6C00]">Sign up</span></Link>
+              <Link to="/register"><span className="text-[#EA6C00]">Sign up</span></Link>
               </p>
+              <Link to = "/"><p className="md:ml-30 md:mt-7 font-bold text-[25px] text-[#2F4F4F]">Chat App</p></Link>
            </div>
 
           
