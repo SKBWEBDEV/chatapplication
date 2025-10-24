@@ -66,7 +66,7 @@ const Ragister = () => {
         .then((user) => {
           sendEmailVerification(auth.currentUser)
           console.log(user, "user");
-          toast.success("ragistation succesfully done");
+          toast.success("ragistation succesfully done & plases varyfication your email");
           setTimeout(() => {
             navigate("/login");
           }, 3000);
