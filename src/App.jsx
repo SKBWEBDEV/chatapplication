@@ -6,8 +6,7 @@ import Login from "./components/Chatapplication/Login";
 import firebaseConfig from "./components/firebase/firebaseconfig";
 import Forgote from "./components/Chatapplication/Forgote";
 import Chat from "./components/Chatapplication/Chat";
-import Home from "./components/Chatapplication/Homef";
-
+import Homef from "./components/Chatapplication/Homef"
 function App() {
 const router = createBrowserRouter([
   {
@@ -24,8 +23,9 @@ const router = createBrowserRouter([
   },
    {
     path: "/home",
-    element: <Home/>,
+    element: <Homef/>,
   },
+ 
   {
     path: "/forgote",
     element: <Forgote/>,
