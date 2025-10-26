@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
-import { ToastContainer, toast } from "react-toastify";
+import { Flip, ToastContainer, toast } from "react-toastify";
 import { DNA } from 'react-loader-spinner'
 
 const Ragister = () => {
@@ -97,7 +97,7 @@ const Ragister = () => {
         draggable
         pauseOnHover
         theme="colored"
-        // transition={Bounce}
+        transition={Flip}
       />
       <div className="md:flex md:items-center ">
         <div className="md:w-[50%] flex md:justify-end justify-center">

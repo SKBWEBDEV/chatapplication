@@ -10,7 +10,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-import { toast, ToastContainer } from "react-toastify";
+import { Flip, toast, ToastContainer } from "react-toastify";
 import { ThreeDots } from "react-loader-spinner";
 import { useDispatch } from "react-redux";
 import { userInfo } from "../userSlice";
@@ -115,7 +115,7 @@ const Login = () => {
         draggable
         pauseOnHover
         theme="colored"
-        // transition={Bounce}
+        transition={Flip}
       />
       <div className="md:flex items-center">
         <div className="md:w-[50%]  flex md:justify-end justify-center">
