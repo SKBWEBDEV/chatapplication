@@ -14,7 +14,9 @@ const Homef = () => {
   if (user.emailVerified) { 
     console.log(user);
     setVeryfi(true)
-  } 
+  } else{
+    setVeryfi(false)
+  }
 });
   return (
     <div>

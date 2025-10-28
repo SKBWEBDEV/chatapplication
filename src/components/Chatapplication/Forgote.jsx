@@ -1,7 +1,7 @@
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useState } from "react";
 import { Link } from "react-router";
-import { ToastContainer, toast } from "react-toastify";
+import { Bounce, ToastContainer, toast } from "react-toastify";
 import { RotatingLines } from 'react-loader-spinner'
 const Forgote = () => {
   const auth = getAuth();
@@ -61,7 +61,7 @@ const Forgote = () => {
         draggable
         pauseOnHover
         theme="colored"
-        // transition={Bounce}
+        transition={Bounce}
       />
       <div className="bg-white relative md:w-[500px] rounded-2xl px-10 py-12 shadow-lg">
         <h1 className="font-bold text-[25px] text-center mb-6">

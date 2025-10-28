@@ -194,7 +194,7 @@ const Login = () => {
                   className="text-[20px] cursor-pointer w-60 md:w-[368px] bg-[#1E1E1E] rounded-full text-white 
                   py-[20px]  font-semibold font-secondary">
                     {
-                      load ? <div className="ml-40">
+                      load ? <div className="md:ml-40 ml-25">
                         <ThreeDots
                   visible={true}
                   height="30"
