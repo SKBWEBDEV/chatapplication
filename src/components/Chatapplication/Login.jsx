@@ -222,7 +222,7 @@ const Login = () => {
               </p>
               <Link to="/">
                 <p className="md:ml-30 md:mt-7 font-bold text-[25px] text-[#2F4F4F]">
-                  Chat App
+                  HOME
                 </p>
               </Link>
             </div>

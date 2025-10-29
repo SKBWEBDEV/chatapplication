@@ -202,7 +202,7 @@ const Ragister = () => {
                   <span className="text-[#EA6C00]">Sign I n</span>
                 </Link>
               </p>
-              <Link to = "/"><p className="md:ml-30 text-[#2F4F4F] md:mt-7 font-bold text-[25px]">Chat App</p></Link>
+              <Link to = "/"><p className="md:ml-30 text-[#2F4F4F] md:mt-7 font-bold text-[25px]">HOME</p></Link>
             </div>
           </div>
         </div>
