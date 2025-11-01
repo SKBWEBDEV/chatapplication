@@ -46,7 +46,7 @@ const Slideber = () => {
 
 
         <div className="bg-[#1E1E1E] relative text-white hover:text-black  w-[155px]  h-[89px] mt-[250px] ml-[30px] rounded-tl-[20px] rounded-bl-[20px] hover:bg-white transition-all duration-500">
-          <ImExit className="w-[60px] h-[60px]  absolute top-[20%] left-[35%] cursor-pointer" />
+          <ImExit onClick={logOut} className="w-[60px] h-[60px]  absolute top-[20%] left-[35%] cursor-pointer" />
           <span className="bg-[#1E1E1E] w-[8px] h-[86px] absolute top-[2%] right-[0%] rounded-tl-[25px] rounded-bl-[25px] shadow-[-2px_0px_4px_0px_rgba(0,0,0,0.25)]"></span>
         </div>
 
