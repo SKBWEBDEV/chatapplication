@@ -7,3 +7,103 @@
   --font-secondary: "Nunito", sans-serif; 
   --font-third: "Poppins", sans-serif; 
 }
+
+body::-webkit-scrollbar-thumb {
+  background-color: #3b82f6; 
+  border-radius: 10px;
+}
+body::-webkit-scrollbar-thumb:hover{
+  background-color: chartreuse;
+  transition:  2s ease;
+}
+body::-webkit-scrollbar {
+  width: 5px; 
+}
+
+
+
+.group::-webkit-scrollbar-thumb {
+  background-color: #3b82f6; 
+  border-radius: 10px;
+}
+.group::-webkit-scrollbar-thumb:hover{
+  background-color: chartreuse;
+  transition:  2s ease;
+}
+.group::-webkit-scrollbar {
+  width: 5px; 
+}
+
+
+
+
+.friendrequest::-webkit-scrollbar-thumb {
+  background-color: #3b82f6; 
+  border-radius: 10px;
+}
+.friendrequest::-webkit-scrollbar-thumb:hover{
+  background-color: chartreuse;
+  transition:  2s ease;
+}
+.friendrequest::-webkit-scrollbar {
+  width: 5px; 
+}
+
+
+
+
+.mygroup::-webkit-scrollbar-thumb {
+  background-color: #3b82f6; 
+  border-radius: 10px;
+}
+.mygroup::-webkit-scrollbar-thumb:hover{
+  background-color: chartreuse;
+  transition:  2s ease;
+}
+.mygroup::-webkit-scrollbar {
+  width: 5px; 
+}
+
+
+
+.userlist::-webkit-scrollbar-thumb {
+  background-color: #3b82f6; 
+  border-radius: 10px;
+}
+.userlist::-webkit-scrollbar-thumb:hover{
+  background-color: chartreuse;
+  transition:  2s ease;
+}
+.userlist::-webkit-scrollbar {
+  width: 5px; 
+}
+
+
+
+
+.friend::-webkit-scrollbar-thumb {
+  background-color: #3b82f6; 
+  border-radius: 10px;
+}
+.friend::-webkit-scrollbar-thumb:hover{
+  background-color: chartreuse;
+  transition:  2s ease;
+}
+.friend::-webkit-scrollbar {
+  width: 5px; 
+}
+
+
+
+
+.blockuser::-webkit-scrollbar-thumb {
+  background-color: #3b82f6; 
+  border-radius: 10px;
+}
+.blockuser::-webkit-scrollbar-thumb:hover{
+  background-color: chartreuse;
+  transition:  2s ease;
+}
+.blockuser::-webkit-scrollbar {
+  width: 5px; 
+}

@@ -7,6 +7,7 @@ import { initializeApp } from "firebase/app";
 const firebaseConfig = {
   apiKey: "AIzaSyAkDo4K2TPqjhYN3ANZxVQsLmG-OLay-8M",
   authDomain: "postman-3e744.firebaseapp.com",
+  databaseURL: "https://postman-3e744-default-rtdb.firebaseio.com",
   projectId: "postman-3e744",
   storageBucket: "postman-3e744.firebasestorage.app",
   messagingSenderId: "312080583775",

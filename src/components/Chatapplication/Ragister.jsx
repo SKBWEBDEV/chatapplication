@@ -3,11 +3,16 @@ import Reg from "../../assets/reg.png";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import { Flip, ToastContainer, toast } from "react-toastify";
-import { DNA } from 'react-loader-spinner'
-
+import { DNA } from "react-loader-spinner";
+import { getDatabase, ref, set } from "firebase/database";
 const Ragister = () => {
+  const db = getDatabase();
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -61,20 +66,29 @@ const Ragister = () => {
     }
     if (email && name && password && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setLoading(true);
-      
+
       createUserWithEmailAndPassword(auth, email, password)
         .then((user) => {
-          sendEmailVerification(auth.currentUser)
+          sendEmailVerification(auth.currentUser);
           console.log(user, "user");
-          toast.success("ragistation succesfully done & plases varyfication your email");
+          toast.success(
+            "ragistation succesfully done & plases varyfication your email"
+          );
+          setLoading(false);
+          set(ref(db, "users/" + user.user.uid), {
+            username: name,
+            email: email,
+            password: password,
+            
+          });
           setTimeout(() => {
             navigate("/login");
           }, 3000);
-          setLoading(false);
-        }).finally(()=> {
-          setEmail("")
-          setName("")
-          setPassword("")
+        })
+        .finally(() => {
+          setEmail("");
+          setName("");
+          setPassword("");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -178,13 +192,13 @@ const Ragister = () => {
               {loading ? (
                 <div className="ml-30">
                   <DNA
-                  visible={true}
-                  height="80"
-                  width="80"
-                  ariaLabel="dna-loading"
-                  wrapperStyle={{}}
-                  wrapperClass="dna-wrapper"
-                />
+                    visible={true}
+                    height="80"
+                    width="80"
+                    ariaLabel="dna-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="dna-wrapper"
+                  />
                 </div>
               ) : (
                 <button
@@ -202,7 +216,11 @@ const Ragister = () => {
                   <span className="text-[#EA6C00]">Sign I n</span>
                 </Link>
               </p>
-              <Link to = "/"><p className="md:ml-30 text-[#2F4F4F] md:mt-7 font-bold text-[25px]">HOME</p></Link>
+              <Link to="/">
+                <p className="md:ml-30 text-[#2F4F4F] md:mt-7 font-bold text-[25px]">
+                  HOME
+                </p>
+              </Link>
             </div>
           </div>
         </div>
