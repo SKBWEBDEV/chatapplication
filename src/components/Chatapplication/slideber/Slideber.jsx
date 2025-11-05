@@ -7,8 +7,10 @@ import { ImExit } from "react-icons/im";
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 const Slideber = () => {
+
   const auth = getAuth();
   const navigate = useNavigate();
+  
   const logOut = () => {
     console.log("ok cool");
     signOut(auth)

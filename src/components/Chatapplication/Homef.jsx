@@ -27,6 +27,8 @@ const Homef = () => {
     }
   });
 
+  
+
   onAuthStateChanged(auth, (user) => {
     if (user.emailVerified) {
       setVerify(true);
@@ -34,9 +36,14 @@ const Homef = () => {
     setLoading(false);
   });
 
+
+
+
   if (loading) {
     return null;
   }
+
+
   return (
     <div>
       {verify ? (
