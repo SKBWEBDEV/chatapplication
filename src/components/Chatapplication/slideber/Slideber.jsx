@@ -6,7 +6,13 @@ import { FiSettings } from "react-icons/fi";
 import { ImExit } from "react-icons/im";
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Slideber = () => {
+
+const sakib = useSelector((state)=> state.user.value.user)
+console.log(sakib);
+
+  
 
   const auth = getAuth();
   const navigate = useNavigate();
@@ -28,6 +34,9 @@ const Slideber = () => {
       <div className="bg-[#1E1E1E] w-[186px] h-[1050px] my-[35px] rounded-[20px]">
         <div>
           <img src={ellipse} alt="" className="px-[43px] py-[38px]" />
+          <div className="text-white font-bold text-center">
+            <p>{sakib?.displayName}</p>
+          </div>
         </div>
 
         <div className="bg-black hover:bg-white relative w-[155px] text-white hover:text-black h-[89px] mt-[80px] ml-[30px] rounded-tl-[20px] rounded-bl-[20px] transition-all duration-500">

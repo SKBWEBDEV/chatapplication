@@ -7,6 +7,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  updateProfile,
 } from "firebase/auth";
 import { Flip, ToastContainer, toast } from "react-toastify";
 import { DNA } from "react-loader-spinner";
@@ -70,6 +71,11 @@ const Ragister = () => {
       createUserWithEmailAndPassword(auth, email, password)
         .then((user) => {
           sendEmailVerification(auth.currentUser);
+          updateProfile(auth.currentUser, {
+            displayName: name,
+          })
+            
+
           console.log(user, "user");
           toast.success(
             "ragistation succesfully done & plases varyfication your email"
@@ -79,7 +85,6 @@ const Ragister = () => {
             username: name,
             email: email,
             password: password,
-            
           });
           setTimeout(() => {
             navigate("/login");

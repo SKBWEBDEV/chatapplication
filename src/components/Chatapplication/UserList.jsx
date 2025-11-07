@@ -6,10 +6,15 @@ import one from "../../assets/one.png";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdAdd } from "react-icons/md";
 
-import { getDatabase, onValue, ref } from "firebase/database";
+import { getDatabase, onValue, ref, set } from "firebase/database";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const UserList = () => {
+
+  const sakib = useSelector((state)=> state.user.value.user)
+  console.log(sakib.uid);
+  
 
 
 const db = getDatabase();
@@ -24,8 +29,11 @@ useEffect(()=> {
 onValue(userRef, (snapshot)=> {
   // console.log(snapshot.val());
 snapshot.forEach((item)=> {
-  // console.log(item.val());
-  arry.push(item.val())
+  console.log(item.key);
+  if (sakib.uid !== item.key) {
+     arry.push(item.val())
+  }
+ 
 })
 
 setUserList(arry);
@@ -37,7 +45,13 @@ setUserList(arry);
 
 // console.log(userList);
 
-
+const handleReQuest = (item)=> {
+  console.log('done',item);
+  set(ref(db,"firendRequest/"),{
+    senderName:sakib.displayName,
+    reciverName:item.username
+  })
+}
 
   return (
     <div>
@@ -76,7 +90,9 @@ setUserList(arry);
 
 
               <div className=" px-[5px] py-[5px] bg-black tont-semibold text-[10px] rounded-[5px]">
-                <span className="text-[30px] font-bold text-white">
+                <span
+                onClick={()=>handleReQuest(user)}
+                className="text-[30px] font-bold text-white">
                   <MdAdd />
                 </span>
               </div>
