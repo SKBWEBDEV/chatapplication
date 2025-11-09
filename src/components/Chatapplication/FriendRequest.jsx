@@ -1,10 +1,44 @@
 import one from "../../assets/one.png";
-import two from "../../assets/two.png";
-import three from "../../assets/three.png";
-import four from "../../assets/four.png";
+// import two from "../../assets/two.png";
+// import three from "../../assets/three.png";
+// import four from "../../assets/four.png";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { getDatabase, ref, onValue, set } from "firebase/database";
+import { useEffect, useState } from "react";
 
 const FriendRequest = () => {
+
+  const db = getDatabase();
+
+  const [okey,setOkey] = useState ([])
+
+  const userRef = ref(db,"firendRequest")
+
+  let arr = []
+
+ useEffect(()=> {
+  
+   onValue(userRef, (snapshot) => {
+  console.log(snapshot.val(),"dod");
+  snapshot.forEach((item)=> {
+    arr.push(item.val())
+  })
+  setOkey(arr);
+  
+});
+ },[])
+// console.log(okey,"done");
+
+
+
+const handleAccept = (item)=> {
+  console.log('done',item);
+    set(ref(db, 'acceptRequest/' + item.reciverName), {
+      reciverName:item.reciverName
+  });
+}
+
+
   return (
     <div>
       <div
@@ -21,7 +55,11 @@ const FriendRequest = () => {
 
 
           <div className="px-2 overflow-y-scroll h-[430px] friendrequest">
-            <div
+
+
+            {
+              okey.map((user)=> (
+                 <div
             className="flex items-center justify-between mt-[17px] border-b-1 border-[#00000040] 
                         border-w-[100px] ">
             <div className="mb-[0px] flex items-center gap-6">
@@ -30,163 +68,36 @@ const FriendRequest = () => {
               </div>
               <div>
                 <h3 className="font-semibold text-[14px] text-[#000000]">
-                  Raghav
+                  {user.reciverName}
                 </h3>
-                <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">
+                {/* <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">
                   Dinner?
-                </h6>
+                </h6> */}
               </div>
             </div>
-            <div className="mb-[10px]">
-              <button className="px-[22px] bg-[#1E1E1E] text-white rounded-[5px] ">
+            <div 
+            
+            className="mb-[10px]">
+              <button 
+              onClick={()=>handleAccept(user)}
+              className="px-[22px] hover:bg-red-600 duration-300 cursor-pointer bg-[#1E1E1E]  text-white rounded-[5px] ">
                 Accept
               </button>
             </div>
           </div>
+              ))
+            }
 
 
 
 
-          <div
-            className="flex items-center justify-between mt-[17px] border-b-1 border-[#00000040] 
-                        border-w-[100px] ">
-            <div className="mb-[0px] flex items-center gap-6">
-              <div className="mb-[10px]">
-                <img src={two} alt="" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-[14px] text-[#000000]">
-                  Swathi
-                </h3>
-                <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">
-                  Sure!
-                </h6>
-              </div>
-            </div>
-            <div className="mb-[10px]">
-              <button className="px-[22px] bg-[#1E1E1E] text-white rounded-[5px] ">
-                Accept
-              </button>
-            </div>
-          </div>
+           
 
 
 
-          <div
-            className="flex items-center justify-between mt-[17px] border-b-1 border-[#00000040] 
-                        border-w-[100px]">
-            <div className="mb-[0px] flex items-center gap-6">
-              <div className="mb-[10px]">
-                <img src={three} alt="" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-[14px] text-[#000000]">
-                  Kiran
-                </h3>
-                <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">
-                  Hi.....
-                </h6>
-              </div>
-            </div>
-            <div className="mb-[10px]">
-              <button className="px-[22px] bg-[#1E1E1E] text-white rounded-[5px] ">
-                Accept
-              </button>
-            </div>
-          </div>
 
 
 
-          <div
-           className="flex items-center justify-between mt-[17px] ">
-            <div className="mb-[0px] flex items-center gap-6">
-              <div className="mb-[10px]">
-                <img src={four} alt="" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-[14px] text-[#000000]">
-                  Tejeshwini C
-                </h3>
-                <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">
-                  I will call him today.
-                </h6>
-              </div>
-            </div>
-            <div className="mb-[10px]">
-              <button className="px-[22px] bg-[#1E1E1E] text-white rounded-[5px] ">
-                Accept
-              </button>
-            </div>
-          </div>
-          
-
-          <div
-           className="flex items-center justify-between mt-[17px] ">
-            <div className="mb-[0px] flex items-center gap-6">
-              <div className="mb-[10px]">
-                <img src={four} alt="" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-[14px] text-[#000000]">
-                  Tejeshwini C
-                </h3>
-                <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">
-                  I will call him today.
-                </h6>
-              </div>
-            </div>
-            <div className="mb-[10px]">
-              <button className="px-[22px] bg-[#1E1E1E] text-white rounded-[5px] ">
-                Accept
-              </button>
-            </div>
-          </div>
-
-
-          <div
-           className="flex items-center justify-between mt-[17px] ">
-            <div className="mb-[0px] flex items-center gap-6">
-              <div className="mb-[10px]">
-                <img src={four} alt="" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-[14px] text-[#000000]">
-                  Tejeshwini C
-                </h3>
-                <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">
-                  I will call him today.
-                </h6>
-              </div>
-            </div>
-            <div className="mb-[10px]">
-              <button className="px-[22px] bg-[#1E1E1E] text-white rounded-[5px] ">
-                Accept
-              </button>
-            </div>
-          </div>
-
-
-          <div 
-          className="flex items-center justify-between mt-[17px] ">
-            <div className="mb-[0px] flex items-center gap-6">
-              <div className="mb-[10px]">
-                <img src={four} alt="" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-[14px] text-[#000000]">
-                  Tejeshwini C
-                </h3>
-                <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">
-                  I will call him today.
-                </h6>
-              </div>
-            </div>
-            <div className="mb-[10px]">
-              <button className="px-[22px] bg-[#1E1E1E] text-white rounded-[5px] ">
-                Accept
-              </button>
-            </div>
-          </div>
           </div>
 
 

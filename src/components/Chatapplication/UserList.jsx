@@ -29,7 +29,7 @@ useEffect(()=> {
 onValue(userRef, (snapshot)=> {
   // console.log(snapshot.val());
 snapshot.forEach((item)=> {
-  console.log(item.key);
+  // console.log(item.key);
   if (sakib.uid !== item.key) {
      arry.push(item.val())
   }
@@ -47,7 +47,7 @@ setUserList(arry);
 
 const handleReQuest = (item)=> {
   console.log('done',item);
-  set(ref(db,"firendRequest/"),{
+  set(ref(db,"firendRequest/" + item.username),{
     senderName:sakib.displayName,
     reciverName:item.username
   })
@@ -89,7 +89,7 @@ const handleReQuest = (item)=> {
               </div>
 
 
-              <div className=" px-[5px] py-[5px] bg-black tont-semibold text-[10px] rounded-[5px]">
+              <div className=" px-[5px] py-[5px] hover:bg-amber-500 cursor-pointer duration-300 bg-black tont-semibold text-[10px] rounded-[5px]">
                 <span
                 onClick={()=>handleReQuest(user)}
                 className="text-[30px] font-bold text-white">

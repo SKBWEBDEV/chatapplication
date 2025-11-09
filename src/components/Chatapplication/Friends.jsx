@@ -1,9 +1,28 @@
 import one from "../../assets/one.png"
-import two from "../../assets/two.png"
-import three from "../../assets/three.png"
-import four from "../../assets/four.png"
+import { getDatabase, onValue, ref } from "firebase/database";
+import { useEffect, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 const Friends = () => {
+
+let arr = []
+const [accept,setAccept] = useState([])
+  
+
+
+useEffect(()=> {
+const db = getDatabase();
+const userRef = ref(db,"acceptRequest/")
+
+onValue(userRef,(snapshot)=> {
+  snapshot.forEach((item)=> {
+    console.log(item.val());
+    arr.push(item.val())
+  })
+  setAccept(arr)
+})
+},[])
+
+
 
   return (
     <div>
@@ -19,7 +38,10 @@ const Friends = () => {
                 </div>
       
                 <div className="px-2 overflow-y-scroll friend h-[451px]">
-                  <div 
+
+                  {
+                    accept.map((user)=>(
+                        <div 
                 className="flex items-center justify-between mt-[17px] border-b-1 border-[#00000040] 
                 border-w-[100px] ">
                   
@@ -28,127 +50,24 @@ const Friends = () => {
                     <img src={one} alt="" />
                   </div>
                     <div>
-                      <h3 className="font-semibold text-[14px] text-[#000000]">Raghav</h3>
-                    <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">Dinner?</h6>
+                      <h3 className="font-semibold text-[14px] text-[#000000]">
+                        {user.reciverName}
+                      </h3>
+                    {/* <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">Dinner?</h6> */}
                     </div>
                   </div>
                   <div className="text-[#00000080] tont-semibold text-[10px]">
                     <p>Today, 8:56pm</p>
                   </div>
                 </div>
-      
-      
-      
-                <div
-                 className="flex items-center justify-between mt-[17px] border-b-1 border-[#00000040] 
-                border-w-[100px] ">
-                  
-                  <div className="mb-[10px] flex items-center gap-6">
-                    <div className="mb-[10px] relative">
-                    <img src={two} alt="" className=""/>
-                    <span className="bg-[#00FF75] w-[15px] h-[15px] absolute bottom-0 right-0 rounded-full border-3 border-white"></span>
-                  </div>
-                    <div>
-                      <h3 className="font-semibold text-[14px] text-[#000000]">Swathi</h3>
-                    <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">Sure!</h6>
-                    </div>
-                  </div>
-                  <div className="text-[#00000080] tont-semibold text-[10px]">
-                    <p>Today, 2:31pm</p>
-                  </div>
-                </div>
-      
-      
-      
-                <div 
-                className="flex items-center justify-between mt-[17px] border-b-1 border-[#00000040] 
-                border-w-[100px]">
-                  
-                  <div className="mb-[10px] flex items-center gap-6">
-                    <div className="mb-[10px]">
-                    <img src={three} alt="" />
-                  </div>
-                    <div>
-                      <h3 className="font-semibold text-[14px] text-[#000000]">Kiran</h3>
-                    <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">Hi.....</h6>
-                    </div>
-                  </div>
-                 <div className="text-[#00000080] tont-semibold text-[10px]">
-                    <p>Yesterday, 6:22pm</p>
-                  </div>
-                </div>
-
-
-                <div 
-                className="flex items-center justify-between mt-[17px] ">
-                  
-                  <div className="mb-[10px] flex items-center gap-6">
-                    <div className="mb-[10px]">
-                    <img src={four} alt="" />
-                  </div>
-                    <div>
-                      <h3 className="font-semibold text-[14px] text-[#000000]">Tejeshwini C</h3>
-                    <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">I will call him today.</h6>
-                    </div>
-                  </div>
-                  <div className="text-[#00000080] tont-semibold text-[10px]">
-                    <p>Today, 12:22pm</p>
-                  </div>
-                </div>
-
-                <div 
-                className="flex items-center justify-between mt-[17px] ">
-                  
-                  <div
-                   className="mb-[10px] flex items-center gap-6">
-                    <div className="mb-[10px]">
-                    <img src={four} alt="" />
-                  </div>
-                    <div>
-                      <h3 className="font-semibold text-[14px] text-[#000000]">Tejeshwini C</h3>
-                    <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">I will call him today.</h6>
-                    </div>
-                  </div>
-                  <div className="text-[#00000080] tont-semibold text-[10px]">
-                    <p>Today, 12:22pm</p>
-                  </div>
-                </div>
+                    ))
+                  }
 
                 
-                <div 
-                className="flex items-center justify-between mt-[17px] ">
-                  
-                  <div className="mb-[10px] flex items-center gap-6">
-                    <div className="mb-[10px]">
-                    <img src={four} alt="" />
-                  </div>
-                    <div>
-                      <h3 className="font-semibold text-[14px] text-[#000000]">Tejeshwini C</h3>
-                    <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">I will call him today.</h6>
-                    </div>
-                  </div>
-                  <div className="text-[#00000080] tont-semibold text-[10px]">
-                    <p>Today, 12:22pm</p>
-                  </div>
-                </div>
+      
+    
 
 
-                <div 
-                className="flex items-center justify-between mt-[17px] ">
-                  
-                  <div className="mb-[10px] flex items-center gap-6">
-                    <div className="mb-[10px]">
-                    <img src={four} alt="" />
-                  </div>
-                    <div>
-                      <h3 className="font-semibold text-[14px] text-[#000000]">Tejeshwini C</h3>
-                    <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">I will call him today.</h6>
-                    </div>
-                  </div>
-                  <div className="text-[#00000080] tont-semibold text-[10px]">
-                    <p>Today, 12:22pm</p>
-                  </div>
-                </div>
                 </div>
       
               </div>

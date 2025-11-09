@@ -6,9 +6,9 @@ import { FiSettings } from "react-icons/fi";
 import { ImExit } from "react-icons/im";
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 const Slideber = () => {
-
+const dispatch = useDispatch()
 const sakib = useSelector((state)=> state.user.value.user)
 console.log(sakib);
 
@@ -22,6 +22,7 @@ console.log(sakib);
     signOut(auth)
       .then(() => {
         localStorage.clear("")
+        dispatch(user(null))
         navigate("/login");
         // Sign-out successful.
       })
