@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 const Friends = () => {
 
-let arr = []
+
 const [accept,setAccept] = useState([])
   
 
@@ -14,6 +14,7 @@ const db = getDatabase();
 const userRef = ref(db,"acceptRequest/")
 
 onValue(userRef,(snapshot)=> {
+  let arr = []
   snapshot.forEach((item)=> {
     console.log(item.val());
     arr.push(item.val())

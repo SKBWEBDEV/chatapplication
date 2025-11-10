@@ -74,12 +74,8 @@ const Ragister = () => {
           updateProfile(auth.currentUser, {
             displayName: name,
           })
-            
-
           console.log(user, "user");
-          toast.success(
-            "ragistation succesfully done & plases varyfication your email"
-          );
+          toast.success("ragistation succesfully done & plases varyfication your email");
           setLoading(false);
           set(ref(db, "users/" + user.user.uid), {
             username: name,

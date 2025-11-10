@@ -8,17 +8,20 @@ import { useEffect, useState } from "react";
 
 const FriendRequest = () => {
 
-  const db = getDatabase();
+  
 
   const [okey,setOkey] = useState ([])
 
-  const userRef = ref(db,"firendRequest")
+  const db = getDatabase();
 
-  let arr = []
+  
 
  useEffect(()=> {
   
+  const userRef = ref(db,"firendRequest")
+  
    onValue(userRef, (snapshot) => {
+    let arr = []
   console.log(snapshot.val(),"dod");
   snapshot.forEach((item)=> {
     arr.push(item.val())

@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router";
 import Slideber from "./slideber/Slideber";
 import Group from "./Group";
 import Friends from "./Friends";
-import User from "./User";
+// import User from "./User";
 import FriendRequest from "./FriendRequest";
 import MyGroups from "./MyGroups";
 import UserList from "./UserList";
@@ -30,7 +30,7 @@ const Homef = () => {
   
 
   onAuthStateChanged(auth, (user) => {
-    if (user.emailVerified) {
+    if (user?.emailVerified) {
       setVerify(true);
     }
     setLoading(false);

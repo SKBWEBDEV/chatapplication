@@ -9,8 +9,9 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 const Slideber = () => {
 const dispatch = useDispatch()
-const sakib = useSelector((state)=> state.user.value.user)
-console.log(sakib);
+const data = useSelector((state)=> (state.user.value.user))
+console.log(data);
+
 
   
 
@@ -18,12 +19,14 @@ console.log(sakib);
   const navigate = useNavigate();
   
   const logOut = () => {
+     
     console.log("ok cool");
     signOut(auth)
       .then(() => {
+        navigate("/login");
         localStorage.clear("")
         dispatch(user(null))
-        navigate("/login");
+       
         // Sign-out successful.
       })
       .catch((error) => {
@@ -36,7 +39,7 @@ console.log(sakib);
         <div>
           <img src={ellipse} alt="" className="px-[43px] py-[38px]" />
           <div className="text-white font-bold text-center">
-            <p>{sakib?.displayName}</p>
+            <p>{data?.displayName}</p>
           </div>
         </div>
 
