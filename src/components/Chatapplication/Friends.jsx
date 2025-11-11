@@ -40,9 +40,10 @@ onValue(userRef,(snapshot)=> {
       
                 <div className="px-2 overflow-y-scroll friend h-[451px]">
 
+
                   {
-                    accept.map((user)=>(
-                        <div 
+                    accept.map((user)=> (
+                      <div 
                 className="flex items-center justify-between mt-[17px] border-b-1 border-[#00000040] 
                 border-w-[100px] ">
                   
@@ -60,9 +61,12 @@ onValue(userRef,(snapshot)=> {
                   <div className="text-[#00000080] tont-semibold text-[10px]">
                     <p>Today, 8:56pm</p>
                   </div>
-                </div>
+                        </div>
                     ))
                   }
+                  
+                        
+                    
 
                 
       

@@ -1,100 +1,84 @@
-import one from "../../assets/one.png";
-// import two from "../../assets/two.png";
-// import three from "../../assets/three.png";
-// import four from "../../assets/four.png";
 import { BsThreeDotsVertical } from "react-icons/bs";
+// import { MdAdd } from "react-icons/md";
 import { getDatabase, ref, onValue, set } from "firebase/database";
 import { useEffect, useState } from "react";
-
-const FriendRequest = () => {
+const Fdrequest = () => {
 
   
-
-  const [okey,setOkey] = useState ([])
-
+  const [done,setDone] = useState ([])
   const db = getDatabase();
 
-  
-
- useEffect(()=> {
-  
-  const userRef = ref(db,"firendRequest")
-  
-   onValue(userRef, (snapshot) => {
-    let arr = []
-  console.log(snapshot.val(),"dod");
-  snapshot.forEach((item)=> {
-    arr.push(item.val())
-  })
-  setOkey(arr);
-  
-});
- },[])
-// console.log(okey,"done");
+  useEffect(() => {
+    const db = getDatabase();
+    const userRef = ref(db, "FriendReques/");
+    onValue(userRef, (snapshot) => {
+      let arr = []
+      snapshot.forEach((item) => {
+        arr.push(item.val())
+      });
+      setDone(arr)
+    });
+    
+  },[]);
+  console.log(done);
 
 
 
-const handleAccept = (item)=> {
-  console.log('done',item);
-    set(ref(db, 'acceptRequest/' + item.reciverName), {
-      reciverName:item.reciverName
+  const acceptRequest = ((item)=> {
+    console.log(item);
+
+     set(ref(db, 'acceptRequest/' +item.reciverName ), {
+     reciverName : item.reciverName
   });
-}
-
+    
+  })
+  
 
   return (
     <div>
       <div
-        className=" mt-[25px] w-[430px]  bg-white rounded-[20px] 
-                    shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] ">
+        className=" mt-[35px] w-[344px]  bg-white rounded-[20px] 
+                        shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] "
+      >
         <div className="py-[13px] px-[20px] font-third ">
           <div className="flex justify-between">
-            <p className="text-[20px] font-semibold">Friend  Request</p>
+            <p className="text-[20px] font-semibold">Friend Requests</p>
             <span>
               <BsThreeDotsVertical className="text-[#1E1E1E] font-bold" />
             </span>
           </div>
 
-
-
-          <div className="px-2 overflow-y-scroll h-[430px] friendrequest">
-
+          <div className="px-2 overflow-y-scroll userlist h-[455px]">
 
             {
-              okey.map((user)=> (
-                 <div
-            className="flex items-center justify-between mt-[17px] border-b-1 border-[#00000040] 
-                        border-w-[100px] ">
-            <div className="mb-[0px] flex items-center gap-6">
-              <div className="mb-[10px]">
-                <img src={one} alt="" />
+              done.map((user)=> (
+                <div
+              className="flex items-center justify-between mt-[17px] border-b-1 border-[#00000040] 
+                            border-w-[100px] ">
+              <div className="mb-[0px] flex items-center gap-6">
+                <div className="mb-[10px]">
+                  <img src="" alt="" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-[14px] text-[#000000]">
+                    {user?.reciverName}
+                  </h3>
+
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold text-[14px] text-[#000000]">
-                  {user.reciverName}
-                </h3>
-                {/* <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">
-                  Dinner?
-                </h6> */}
+              
+              <div
+              onClick={()=> acceptRequest (user)}
+              className="  hover:bg-amber-500 cursor-pointer duration-300 bg-black   rounded-[5px]">
+                <button className="text-[18px] font-normal px-5 py-1 cursor-pointer text-white">
+                  Accept
+                </button>
               </div>
             </div>
-            <div 
-            
-            className="mb-[10px]">
-              <button 
-              onClick={()=>handleAccept(user)}
-              className="px-[22px] hover:bg-red-600 duration-300 cursor-pointer bg-[#1E1E1E]  text-white rounded-[5px] ">
-                Accept
-              </button>
-            </div>
-          </div>
               ))
             }
 
-
-
-
-           
+            
 
 
 
@@ -102,13 +86,10 @@ const handleAccept = (item)=> {
 
 
           </div>
-
-
-
         </div>
       </div>
     </div>
   );
 };
 
-export default FriendRequest;
+export default Fdrequest;
