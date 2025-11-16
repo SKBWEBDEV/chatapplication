@@ -1,50 +1,80 @@
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdAdd } from "react-icons/md";
-import { getDatabase, ref, onValue, set } from "firebase/database";
+import { getDatabase, ref, onValue, set, push } from "firebase/database";
 import { useEffect, useState } from "react";
-import four from "../../assets/four.png"
+import four from "../../assets/four.png";
 import { useSelector } from "react-redux";
+import { TiMinus } from "react-icons/ti";
 const UserList = () => {
+  const data = useSelector((state) => state.user.value?.user);
+  console.log(data?.uid, "ok");
 
-  const data = useSelector((state) => state.user.value.user)
-  console.log(data?.uid,'ok');
-  
-
-    const db = getDatabase();
-
-
+  const db = getDatabase();
 
   const [okey, setOkey] = useState([]);
 
   useEffect(() => {
-  const userRef = ref(db, "users/");
-  
-    onValue(userRef, (snapshot) => {
-        let arr = [];
-      snapshot.forEach((item) => {
+    const userRef = ref(db, "users/");
 
+    onValue(userRef, (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
         console.log(item.key);
-        
-       if (data?.uid !== item.key) {
-        arr.push(item.val());
-       }
-        
+
+        if (data?.uid !== item.key) {
+          arr.push({ ...item.val(), userid: item.key });
+        }
       });
       setOkey(arr);
     });
   }, []);
   console.log(okey);
 
+  const friendRequest = (item) => {
+    console.log(item,'ibrahim');
+    push(ref(db, "FriendReques/"), {
+      senderName: data.displayName,
+      senderId: data?.uid,
+      reciverName: item.username,
+      reciverId: item.userid,
+    });
+  };
+
+  const [requestList, setRequestList] = useState([]);
+
+  useEffect(() => {
+    const requestRef = ref(db, "FriendReques/");
+    onValue(requestRef, (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        arr.push(item.val().reciverId + item.val().senderId);
+      });
+      setRequestList(arr);
+    });
+  }, []);
+
+  console.log(requestList);
 
 
-  const friendRequest = (item)=> {
-    console.log(item);
-     set(ref(db, 'FriendReques/' +item.username), {
-      senderName : data.displayName,
-      reciverName : item.username
 
-  });
-  }
+
+  const [accRequest, setAccRequest] = useState([]);
+
+  useEffect(() => {
+    const requestRef = ref(db, "AcceptRequest/");
+    onValue(requestRef, (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        arr.push(item.val().reciverId + item.val().senderId);
+      });
+      setAccRequest(arr);
+    });
+  }, []);
+
+  console.log(accRequest);
+
+
+
 
   return (
     <div>
@@ -80,13 +110,32 @@ const UserList = () => {
                   </div>
                 </div>
 
-                <div
-                onClick={()=> friendRequest (user)}
-                className=" px-[5px] py-[5px] hover:bg-amber-500 cursor-pointer duration-300 bg-black tont-semibold text-[10px] rounded-[5px]">
-                  <span className="text-[30px] font-bold text-white">
-                    <MdAdd />
-                  </span>
-                </div>
+                {
+                accRequest.includes(data?.uid + user.userid) ||
+                  accRequest.includes(user.userid + data?.uid) ? 
+                  <div className=" px-[5px] py-[5px] hover:bg-amber-500 cursor-pointer duration-300 bg-black tont-semibold text-[10px] rounded-[5px]">
+                    <span className="text-[14px] font-normal text-white">
+                      friend
+                    </span>
+                  </div> 
+                  :
+                requestList.includes(data?.uid + user.userid) ||
+                requestList.includes(user.userid + data?.uid) ? (
+                  <div className=" px-[5px] py-[5px] hover:bg-amber-500 cursor-pointer duration-300 bg-black tont-semibold text-[10px] rounded-[5px]">
+                    <span className="text-[30px] font-bold text-white">
+                      <TiMinus />
+                    </span>
+                  </div>
+                ) : 
+                  (
+                  <div
+                    onClick={() => friendRequest(user)}
+                    className=" px-[5px] py-[5px] hover:bg-amber-500 cursor-pointer duration-300 bg-black tont-semibold text-[10px] rounded-[5px]">
+                    <span className="text-[30px] font-bold text-white">
+                      <MdAdd />
+                    </span>
+                  </div>
+                )}
               </div>
             ))}
           </div>

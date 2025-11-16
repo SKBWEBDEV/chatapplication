@@ -72,7 +72,7 @@ const Login = () => {
       setLoad(true);
       signInWithEmailAndPassword(auth, email, password)
         .then((user) => {
-          dispatch(userInfo(user.user))
+          dispatch(userInfo(user))
           localStorage.setItem("userInfo",JSON.stringify(user))
           toast.success("login succes fully done");
           setTimeout(() => {
