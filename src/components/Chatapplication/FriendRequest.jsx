@@ -1,5 +1,5 @@
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { getDatabase, ref, onValue, push, remove } from "firebase/database";
+import { getDatabase, ref, onValue, push, remove, set } from "firebase/database";
 import { useEffect, useState } from "react";
 import one from "../../assets/one.png";
 import { useSelector } from "react-redux";
@@ -20,7 +20,7 @@ const Fdrequest = () => {
         console.log(item.val());
         
         if (data?.uid == item.val().reciverId) {
-          arr.push(item.val());
+          arr.push({...item.val(),userId: item.key});
         }
       });
       setRequestList(arr);
@@ -30,15 +30,16 @@ const Fdrequest = () => {
 
   const handleRequest = (item) => {
     console.log(item, "item");
-    push(ref(db, "AcceptRequest/"), {
+    set(push(ref(db, "AcceptRequest/")), {
       reciverName: item.reciverName,
       reciverId: item.reciverId,
       senderName: item.senderName,
       senderId: item.senderId,
-    });
+    })
+    .then(()=> {
+      remove(ref(db, "FriendReques/" +item.userId));
+    })
 
-    remove(ref(db, "FriendReques/" ));
-    
   };
 
 
@@ -72,6 +73,7 @@ const Fdrequest = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-[14px] text-[#000000]">
+                    
                       {user.senderName}
                     </h3>
                   </div>

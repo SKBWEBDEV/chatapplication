@@ -32,7 +32,7 @@ const UserList = () => {
 
   const friendRequest = (item) => {
     console.log(item,'ibrahim');
-    push(ref(db, "FriendReques/"), {
+    set(push(ref(db, "FriendReques/")), {
       senderName: data.displayName,
       senderId: data?.uid,
       reciverName: item.username,
@@ -68,6 +68,23 @@ const UserList = () => {
         arr.push(item.val().reciverId + item.val().senderId);
       });
       setAccRequest(arr);
+    });
+  }, []);
+
+  console.log(accRequest);
+
+
+
+  const [block, setBlock] = useState([]);
+
+  useEffect(() => {
+    const requestRef = ref(db, "BlockUser/");
+    onValue(requestRef, (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        arr.push(item.val().reciverId + item.val().senderId);
+      });
+      setBlock(arr);
     });
   }, []);
 
@@ -111,6 +128,14 @@ const UserList = () => {
                 </div>
 
                 {
+                   block.includes(data?.uid + user.userid) ||
+                  block.includes(user.userid + data?.uid) ? 
+                  <div className=" px-[5px] py-[5px] hover:bg-amber-500 cursor-pointer duration-300 bg-black tont-semibold text-[10px] rounded-[5px]">
+                    <span className="text-[14px] font-normal text-white">
+                      block
+                    </span>
+                  </div> 
+                  :
                 accRequest.includes(data?.uid + user.userid) ||
                   accRequest.includes(user.userid + data?.uid) ? 
                   <div className=" px-[5px] py-[5px] hover:bg-amber-500 cursor-pointer duration-300 bg-black tont-semibold text-[10px] rounded-[5px]">
@@ -130,7 +155,8 @@ const UserList = () => {
                   (
                   <div
                     onClick={() => friendRequest(user)}
-                    className=" px-[5px] py-[5px] hover:bg-amber-500 cursor-pointer duration-300 bg-black tont-semibold text-[10px] rounded-[5px]">
+                    className=" px-[5px] py-[5px] hover:bg-amber-500 cursor-pointer duration-300 bg-black tont-semibold text-[10px] 
+                    rounded-[5px]">
                     <span className="text-[30px] font-bold text-white">
                       <MdAdd />
                     </span>

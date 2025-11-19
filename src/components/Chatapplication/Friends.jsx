@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import one from "../../assets/one.png";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, ref, onValue, push, set, remove } from "firebase/database";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useSelector } from "react-redux";
-const Friends = () => {
 
+
+const Friends = () => {
+  
+
+
+  
   const data = useSelector((state) => state?.user?.value?.user);
 
   const [accept, setAccept] = useState([]);
@@ -16,8 +21,8 @@ const Friends = () => {
       let arr = []
       snapshot.forEach((item) => {
         console.log(item.val(),'iluyg');
-        if (data?.uid == item.val().reciverId) {
-          arr.push(item.val())
+        if (data?.uid == item.val().reciverId || data.uid == item.val().senderId) {
+          arr.push({...item.val(),blockId:item.key})
         }
         
       });
@@ -25,6 +30,24 @@ const Friends = () => {
     });
   }, []);
   console.log(accept);
+
+
+
+  const handleBlock = (item)=> {
+    console.log(item,'block');
+    
+    set(push(ref(db, 'BlockUser/')), {
+      reciverId:item.reciverId,
+      reciverName:item.reciverName,
+      senderId:item.senderId,
+      senderName:item.senderName
+  })
+
+  .then(()=> {
+    remove(ref(db,"AcceptRequest/" +item.blockId))
+  })
+    
+  }
 
 
 
@@ -59,13 +82,18 @@ const Friends = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-[14px] text-[#000000]">
-                    {user.senderName}
+                    {
+                      data.uid == user.reciverId ? user.senderName : user.reciverName
+                    }
                   </h3>
                   {/* <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">Dinner?</h6> */}
                 </div>
               </div>
-              <div className="text-[#00000080] tont-semibold text-[10px]">
-                <p>Today, 8:56pm</p>
+              <div className=" tont-semibold text-[15px]">
+                <button
+                onClick={()=> handleBlock (user)}
+                className=" px-8 py-1 rounded-[8px] bg-black text-white hover:bg-amber-400 duration-300 cursor-pointer">
+                  block</button>
               </div>
             </div>
               ))
