@@ -82,7 +82,7 @@ const UserList = () => {
     onValue(requestRef, (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
-        arr.push(item.val().reciverId + item.val().senderId);
+        arr.push(data.uid + item.val().blockId);
       });
       setBlock(arr);
     });
@@ -97,8 +97,7 @@ const UserList = () => {
     <div>
       <div
         className=" mt-[35px] w-[344px]  bg-white rounded-[20px] 
-                    shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] "
-      >
+                    shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] ">
         <div className="py-[13px] px-[20px] font-third ">
           <div className="flex justify-between">
             <p className="text-[20px] font-semibold">User List</p>
@@ -111,8 +110,7 @@ const UserList = () => {
             {okey.map((user) => (
               <div
                 className="flex items-center justify-between mt-[17px] border-b-1 border-[#00000040] 
-                        border-w-[100px] "
-              >
+                        border-w-[100px] ">
                 <div className="mb-[0px] flex items-center gap-6">
                   <div className="mb-[10px]">
                     <img src={four} alt="" />
@@ -128,7 +126,7 @@ const UserList = () => {
                 </div>
 
                 {
-                   block.includes(data?.uid + user.userid) ||
+                    block.includes(data?.uid + user.userid) ||
                   block.includes(user.userid + data?.uid) ? 
                   <div className=" px-[5px] py-[5px] hover:bg-amber-500 cursor-pointer duration-300 bg-black tont-semibold text-[10px] rounded-[5px]">
                     <span className="text-[14px] font-normal text-white">

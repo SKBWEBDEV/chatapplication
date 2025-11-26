@@ -20,7 +20,7 @@ const BlockUser = () => {
       let arr = []
       snapshot.forEach((item)=> {
         console.log(item.val());
-        if (data.uid == item.val().reciverId ) {
+        if (data.uid == item.val().blockerId) {
           arr.push({...item.val(), blockId: item.key})
         }
         
@@ -35,16 +35,9 @@ const BlockUser = () => {
 
   const handleUnBlock = (item)=> {
     console.log(item,'okey');
-
     remove(ref(db,"BlockUser/" +item.blockId))
     
   }
-
-
-
-  
-
-
 
   return (
     <div>
@@ -72,7 +65,7 @@ const BlockUser = () => {
               </div>
               <div>
                 <h3 className="font-semibold text-[14px] text-[#000000]">
-                  {user.senderName}
+                  {user.blockName}
                 </h3>
                 <h6 className="text-[#4D4D4DBF] text-[10px] font-medium">
                   Today, 8:56pm

@@ -37,14 +37,14 @@ const Friends = () => {
     console.log(item,'block');
     
     set(push(ref(db, 'BlockUser/')), {
-      reciverId:item.reciverId,
-      reciverName:item.reciverName,
-      senderId:item.senderId,
-      senderName:item.senderName
+      blockerId:data.uid,
+      blockerName:data.displayName,
+      blockId:item.senderId,
+      blockName:item.senderName
   })
 
   .then(()=> {
-    remove(ref(db,"AcceptRequest/" +item.blockId))
+    remove(ref(db,"AcceptRequest/" + item.blockId))
   })
     
   }

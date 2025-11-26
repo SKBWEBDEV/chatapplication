@@ -49,7 +49,7 @@ const Homef = () => {
       {verify ? (
         <div className=" flex px-[40px] ">
           <div className="mr-16">
-            <Slideber />
+            <Slideber active="home"/>
           </div>
 
           <div>
