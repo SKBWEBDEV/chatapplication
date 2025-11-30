@@ -19,7 +19,7 @@ console.log(data);
   const auth = getAuth();
   const navigate = useNavigate();
   
-  const logOut = (active) => {
+  const logOut = () => {
      
     console.log("ok cool");
     signOut(auth)

@@ -60,8 +60,7 @@ const Friends = () => {
     <div>
       <div
         className=" mt-[35px] w-[344px]  bg-white rounded-[20px] 
-            shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] "
-      >
+            shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] ">
         <div className="py-[13px] px-[20px] font-third ">
           <div className="flex justify-between">
             <p className="text-[20px] font-semibold">Friends</p>

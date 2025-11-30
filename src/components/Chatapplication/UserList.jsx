@@ -106,6 +106,10 @@ const UserList = () => {
             </span>
           </div>
 
+          <div>
+            <input type="text" placeholder="surce people" className="border w-full outline-0 px-5 border-black/20 rounded-lg"/>
+          </div>
+
           <div className="px-2 overflow-y-scroll userlist h-[455px]">
             {okey.map((user) => (
               <div
