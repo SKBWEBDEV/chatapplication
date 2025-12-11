@@ -9,38 +9,43 @@ import { useSelector } from "react-redux";
 import { getDatabase, push, ref, set } from "firebase/database";
 import { onValue } from "firebase/database";
 
+import moment from "moment"
+
+import EmojiPicker from 'emoji-picker-react';
 
 
 const Chatting = () => {
 
   const db = getDatabase();
 
-  const data = useSelector ((state)=> (state.massageus.value))
-  const currentUser = useSelector((state) => state.user.value.user);
+  const currentUser = useSelector ((state)=> (state.massageus.value))
+  const data = useSelector((state) => state.user.value.user);
   console.log(currentUser);
   
   console.log(data);
 
-  const [msg,setMsg] = useState ("")
-  // const [errorMst,setErrorMsg] = useState ("")
+  const [msg, setMsg] = useState("");
 
 
+const handleMsg = (event) => {
+  setMsg(event.target.value);
+};
 
-  const handleMsg = (event)=> {
-    setMsg(event.target.value,);
-  }
 
+const handleMsge = () => {
+  console.log(msg);
 
-  const handleMsge = ()=> {
-    console.log(msg);
-
-    if (msg) {
-       set(push (ref(db, 'massage/')), {
-        text:msg
+  set(push(ref(db, "massage/")), {
+    senderId: data.uid,
+    senderName: data.displayName,
+    reciverId: currentUser.id,
+    reciverName: currentUser.name,
+    msg: msg,
+    time: moment().format("MMMM Do YYYY, h:mm:ss a"),
   });
-      
-    }
-  }
+
+  setMsg(""); 
+};
 
   const msgRef = ref(db,"massage/")
   const [massage,setMassage] = useState ([])
@@ -49,19 +54,29 @@ const Chatting = () => {
     onValue(msgRef,(snapshot)=> {
     let arr = []
     snapshot.forEach((item)=> {
-      console.log(item.val());
+      if (
+        (data.uid == item.val().senderId && currentUser?.id == item.val().reciverId)
+        || 
+        ( data.uid == item.val().reciverId && currentUser?.id == item.val().senderId )
+      )
+      
       arr.push(item.val())
     })
     setMassage(arr)
   })
-  },[])
+  },[currentUser?.id])
   console.log(massage);
   
 
 
 
   
-  
+    const [emoji,setEmoji] = useState (false)
+
+
+    const hanldeEmoji = (emoj)=> {
+      setMsg((okey)=> okey + emoj.emoji)
+    }
 
   
 
@@ -82,7 +97,7 @@ const Chatting = () => {
               <div>
                 <h3 className="font-semibold text-[14px] text-[#000000]">
                  {
-                   data?.senderId === currentUser?.uid ? data?.reciverName : data?.senderName
+                   currentUser?.name
                  }
 
                 </h3>
@@ -93,75 +108,31 @@ const Chatting = () => {
             </div>
             <div className=" tont-semibold text-[15px]">
               <span>
-                <BsThreeDotsVertical className="text-[#1E1E1E] font-bold" />
+                <BsThreeDotsVertical className="text-[#1e1e1e80] font-bold" />
               </span>
             </div>
           </div>
 
           <div className="px-2 overflow-y-scroll friend h-[451px]">
-            <div className="relative">
-              <div className="bg-[#F1F1F1] w-[194px] h-[50px] mt-[56px] text-center rounded-lg ">
-                <p className="py-3">Hey There !</p>
-              </div>
-              <div className="absolute bottom-[-1px] left-[-9px]">
-                <p className="text-[#F1F1F1]">
-                  <BsFillTriangleFill />
-                </p>
-              </div>
-            </div>
+            
 
-            <div className="text-[12px] text-black/20 font-medium mt-3">
-              <p>Today, 2:01pm</p>
-            </div>
 
-            {/* <div className="relative">
-              <div className="bg-[#F1F1F1] w-[194px] h-[50px] mt-[56px] text-center rounded-lg ">
-                <p className="py-3">Hey There !</p>
-              </div>
-              <div className="absolute bottom-[-1px] left-[-9px]">
-                <p className="text-[#F1F1F1]">
-                  <BsFillTriangleFill />
-                </p>
-              </div>
-            </div>
 
-            <div className="text-[12px] text-black/20 font-medium mt-3">
-              <p>Today, 2:01pm</p>
-            </div> */}
-
-            <div className="flex justify-end">
+            <div className="">
               <div className="relative">
                 <div className="mt-[56px] text-center rounded-lg mr-10 mb-5">
                   
                    {
                     massage.map((user)=> (
-                      <p className="py-3 bg-black text-white w-[194px] rounded-lg mt-2 mb-2">
-                        {
-                          user.text
-                        }
-                        </p>
-                    ))
-                   }
-                  
-                </div>
-
-                <div className="absolute bottom-[19px] right-[33px]">
-                  <p className="text-black">
-                    <BsFillTriangleFill />
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-[12px] text-black/20 font-medium mt-0 text-right mr-10">
-              <p>Today, 2:01pm</p>
-            </div>
-
-            {/* <div className="flex justify-end">
+                      data.uid == user.senderId ? 
+                      <div>
+            <div className="flex justify-end">
               <div className="relative">
                 <div className="mt-[56px] text-center rounded-lg mr-10 mb-5">
                   <p className="py-3 bg-black text-white px-5 rounded-lg">
-                    I am good and hoew about you?
+                    {
+                      user.msg
+                    }
                   </p>
                 </div>
 
@@ -173,14 +144,20 @@ const Chatting = () => {
               </div>
             </div>
 
-            <div className="text-[12px] text-black/20 font-medium mt-0 text-right mr-10">
-              <p>Today, 2:01pm</p>
-            </div> */}
-
-            {/* <div className="relative">
-              <div className="bg-[#F1F1F1] w-[500px]  mt-[56px] rounded-lg ">
-                <p className="py-3 px-5">
-                  I am doing well. Can we meet up tomorrow?
+            <div className="text-[12px]  font-medium mt-0 text-right mr-10">
+              <p>
+                {user.time}
+              </p>
+            </div>     
+             </div> 
+             : 
+             <div>
+              <div className="relative">
+              <div className="bg-[#F1F1F1] w-[194px] h-[50px] mt-[56px] text-center rounded-lg ">
+                <p className="py-3">
+                  {
+                    user.msg
+                  }
                 </p>
               </div>
               <div className="absolute bottom-[-1px] left-[-9px]">
@@ -190,46 +167,51 @@ const Chatting = () => {
               </div>
             </div>
 
-            <div className="text-[12px] text-black/20 font-medium mt-3">
-              <p>Today, 2:01pm</p>
-            </div> */}
-{/* 
-            <div className="flex justify-end">
-              <div className="relative">
-                <div className="mt-[56px] text-center rounded-lg mr-10 mb-5">
-                  <p className="py-3 bg-black text-white px-5 rounded-lg">
-                    Sure!
-                  </p>
+            <div className="text-[12px]  font-medium mt-3">
+              <p className="text-red-700">
+                {user.time}
+              </p>
+            </div>
+              </div>
+                    ))
+                   }
+                  
                 </div>
 
-                <div className="absolute bottom-[19px] right-[33px]">
-                  <p className="text-black">
-                    <BsFillTriangleFill />
-                  </p>
-                </div>
+                
               </div>
             </div>
 
-            <div className="text-[12px] text-black/20 font-medium mt-0 text-right mr-10">
-              <p>Today, 2:01pm</p>
-            </div> */}
 
 
           </div>
 
 
           <div className="relative">
+            
+              <div className="absolute bottom-[150px] left-60">
+                {
+                  emoji && 
+            <EmojiPicker onEmojiClick={hanldeEmoji}/>
+                }
+              </div>
+            
             <div className="mt-[47px] border-b-2 border-black/20 "></div>
             <div className="flex mt-10 items-center">
 
               <div className="mb-10">
                 <input
                   onChange={handleMsg}
+                  value={msg}
                   className="bg-[#F1F1F1] outline-0 w-[500px] px-25 py-1 h-[45px]  rounded-lg"
                   type="text"
                   placeholder=""/>
-                <span className="absolute bottom-[50px] text-[#707070] text-[25px] right-[170px] ">
+                <span 
+                onClick={(e)=> setEmoji (!emoji)}
+                className="absolute bottom-[50px] text-[#707070] text-[25px] right-[170px] cursor-pointer">
+
                   <MdEmojiEmotions />
+   
                 </span>
                 <span className="absolute bottom-[50px] text-[#707070] text-[24px] right-[130px] ">
                   <FaCamera />

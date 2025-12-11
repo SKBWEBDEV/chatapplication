@@ -9,6 +9,7 @@ import Chat from "./components/Chatapplication/Chat";
 import Homef from "./components/Chatapplication/Homef"
 import Massage from "./components/Massege/Massage";
 import Chatting from "./components/Chatapplication/Chatting";
+import Satting from "./components/Chatapplication/Satting"
 function App() {
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: "/msg",
     element: <Massage/>,
+  },
+  {
+    path: "/setting",
+    element: <Satting/>,
   },
   {
     path: "/chat",

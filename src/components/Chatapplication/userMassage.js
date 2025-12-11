@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  value: localStorage.getItem("masenger") ? JSON.parse (localStorage.getItem("masenger")) : null,
+  value: localStorage.getItem("masenger") ? JSON.parse (localStorage.getItem("masenger")) : null
 }
 
 export const massageSlice = createSlice({

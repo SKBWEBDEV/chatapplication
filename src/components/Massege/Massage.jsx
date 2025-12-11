@@ -36,17 +36,29 @@ const Massage = () => {
 
 
 const handleMassege = (item) => {
-  const messageData = {
-    senderId: item.senderId,
-    reciverId: item.reciverId,
-    senderName: item.senderName,
-    reciverName: item.reciverName,
-    blockId: item.blockId
-  };
 
-  dispatch(massage(messageData));
+  
 
-  localStorage.setItem("masenger", JSON.stringify(messageData));
+    let massageData;
+    
+    if (data.uid == item.senderId) {
+      massageData = {
+        name:item.reciverName,
+        id: item.reciverId
+      }
+    }else{
+      massageData = {
+        name : item.senderName,
+        id : item.senderId
+      }
+    }
+
+    dispatch(massage(massageData))
+
+    console.log(massageData);
+    
+
+  localStorage.setItem("masenger", JSON.stringify(massageData));
 
   console.log(item);
 };

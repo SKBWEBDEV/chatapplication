@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 const Slideber = () => {
 const dispatch = useDispatch()
 const data = useSelector((state)=> (state?.user?.value))
-console.log(data);
+// console.log(data);
 
 
   
@@ -59,7 +59,7 @@ console.log(data);
         
         <div className="bg-[#1E1E1E] relative text-white hover:text-black  w-[155px]  h-[89px] mt-[60px] ml-[30px] rounded-tl-[20px] 
         rounded-bl-[20px] hover:bg-white transition-all duration-500">
-          <FiSettings className="w-[60px] h-[60px]  absolute top-[20%] left-[35%] " />
+         <Link to = "/setting"> <FiSettings className="w-[60px] h-[60px]  absolute top-[20%] left-[35%] " /></Link>
           <span className="bg-[#1E1E1E] w-[8px] h-[86px] absolute top-[2%] right-[0%] rounded-tl-[25px] rounded-bl-[25px] shadow-[-2px_0px_4px_0px_rgba(0,0,0,0.25)]"></span>
         </div>
 

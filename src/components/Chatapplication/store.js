@@ -5,6 +5,7 @@ import  massageSlice  from './userMassage'
 export const store = configureStore({
   reducer: {
     user : userSlice,
-    massageus : massageSlice
+    massageus : massageSlice,
+    
   },
 })

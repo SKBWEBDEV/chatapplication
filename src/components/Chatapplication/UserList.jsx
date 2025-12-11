@@ -92,6 +92,27 @@ const UserList = () => {
 
 
 
+  const [searchList,setSearchList] = useState ([])
+
+  const handleSearch = (event)=> {
+    let arr = []
+    if (event.target.value.length == 0) {
+      setSearchList([])
+    }else{
+      okey.filter((item) => {
+        if (item.username.toLowerCase().includes(event.target.value.toLowerCase())) {
+        arr.push(item)
+        setSearchList(arr)
+      }
+      })
+      
+    }
+  }
+  console.log(searchList);
+  
+
+
+
 
   return (
     <div>
@@ -107,11 +128,16 @@ const UserList = () => {
           </div>
 
           <div>
-            <input type="text" placeholder="surce people" className="border w-full outline-0 px-5 border-black/20 rounded-lg"/>
+            <input type="text" placeholder="surce people" 
+            onChange={handleSearch}
+            className="border w-full outline-0 px-5 border-black/20 rounded-lg"/>
           </div>
 
-          <div className="px-2 overflow-y-scroll userlist h-[455px]">
-            {okey.map((user) => (
+           <div className="px-2 overflow-y-scroll userlist h-[455px]">
+            
+            {
+              searchList.length === 0 ? 
+              okey.map((user) => (
               <div
                 className="flex items-center justify-between mt-[17px] border-b-1 border-[#00000040] 
                         border-w-[100px] ">
@@ -165,7 +191,67 @@ const UserList = () => {
                   </div>
                 )}
               </div>
-            ))}
+            ))
+              : 
+              searchList.map((user) => (
+              <div
+                className="flex items-center justify-between mt-[17px] border-b-1 border-[#00000040] 
+                        border-w-[100px] ">
+                <div className="mb-[0px] flex items-center gap-6">
+                  <div className="mb-[10px]">
+                    <img src={four} alt="" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-[14px] text-[#000000]">
+                      {user.username}
+                    </h3>
+                    <h6 className="text-[#4D4D4DBF] text-[12px] font-medium">
+                      {user.email}
+                    </h6>
+                  </div>
+                </div>
+
+                {
+                    block.includes(data?.uid + user.userid) ||
+                  block.includes(user.userid + data?.uid) ? 
+                  <div className=" px-[5px] py-[5px] hover:bg-amber-500 cursor-pointer duration-300 bg-black tont-semibold text-[10px] rounded-[5px]">
+                    <span className="text-[14px] font-normal text-white">
+                      block
+                    </span>
+                  </div> 
+                  :
+                accRequest.includes(data?.uid + user.userid) ||
+                  accRequest.includes(user.userid + data?.uid) ? 
+                  <div className=" px-[5px] py-[5px] hover:bg-amber-500 cursor-pointer duration-300 bg-black tont-semibold text-[10px] rounded-[5px]">
+                    <span className="text-[14px] font-normal text-white">
+                      friend
+                    </span>
+                  </div> 
+                  :
+                requestList.includes(data?.uid + user.userid) ||
+                requestList.includes(user.userid + data?.uid) ? (
+                  <div className=" px-[5px] py-[5px] hover:bg-amber-500 cursor-pointer duration-300 bg-black tont-semibold text-[10px] rounded-[5px]">
+                    <span className="text-[30px] font-bold text-white">
+                      <TiMinus />
+                    </span>
+                  </div>
+                ) : 
+                  (
+                  <div
+                    onClick={() => friendRequest(user)}
+                    className=" px-[5px] py-[5px] hover:bg-amber-500 cursor-pointer duration-300 bg-black tont-semibold text-[10px] 
+                    rounded-[5px]">
+                    <span className="text-[30px] font-bold text-white">
+                      <MdAdd />
+                    </span>
+                  </div>
+                )}
+              </div>
+            ))
+            }
+          
+
+            
           </div>
         </div>
       </div>
